@@ -35,11 +35,11 @@ client.on('message', message => {
       if(parseInt(msgCount) === LIMIT) {
         const role = message.guild.roles.cache.get('');
         message.member.roles.add(role);
-        message.channel.send('You have been muted.');
+        message.channel.send('You have been muted for 5 minutes. Repeated violation will result in a kick/ban');
         setTimeout(() => {
           message.member.roles.remove(role);
           message.channel.send('You have been unmuted');
-        }, TIME);
+        }, 5 * 60 * 1000);
       } else {
         userData.msgCount = msgCount;
         usersMap.set(message.author.id, userData);
